@@ -1,4 +1,5 @@
 extends Node
+class_name GameController
 
 @export var level_node: Node2D
 
@@ -6,12 +7,15 @@ extends Node
 @export var red_layer: TileMapLayer
 @export var blue_layer: TileMapLayer
 
-@export var current_turn_label: Label
+@export var current_turn_label: RichTextLabel
 @export var reset_button: Button
 
 @export var map_size: Vector2 = Vector2(100, 100)
 
 const TILESET_ID = 0
+const WIN_CONDITION = 6
+var placed_cells: Dictionary[Vector2i, HexCell] = {}
+var running: bool = true
 
 enum Players {
 	RED,
@@ -21,7 +25,10 @@ enum Players {
 var turn: int = Players.RED:
 	set(value):
 		turn = value
-		self.current_turn_label.text = str(Players.find_key(self.turn)) + "'s turn"
+		var bbcode = "[color=" + ("red" if value == Players.RED else "blue") + "]"
+		self.current_turn_label.set_text(
+			bbcode + str(Players.find_key(self.turn)) + "'s turn"
+		)
 
 var steps: int = 0
 
@@ -41,9 +48,15 @@ func _ready() -> void:
 	reset_button.pressed.connect(on_reset)
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("Place"):
-		var mouse_coords = background_layer.get_local_mouse_position()
-		place_at(mouse_coords)
+	var finished_game: bool = false
+	if self.running:
+		if Input.is_action_just_pressed("Place"):
+			var mouse_coords = background_layer.get_local_mouse_position()
+			finished_game = place_at(mouse_coords)
+	
+	if finished_game:
+		print("player ", self.turn, " won")
+		on_reset()
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventScreenTouch:
@@ -51,28 +64,37 @@ func _input(event: InputEvent) -> void:
 
 
 func on_reset():
+	self.running = true
 	self.steps = 0
+	self.placed_cells.clear()
 	self.red_layer.clear()
 	self.blue_layer.clear()
 	self.turn = Players.RED
 
 
-func place_at(global_coords: Vector2):
+func place_at(global_coords: Vector2) -> bool:
 	var local_coords = background_layer.local_to_map(global_coords)
+	var finished_game: bool = false
 	if can_place_at(local_coords):
-		_place_at(local_coords)
-		next_turn()
+		var cell = _place_at(local_coords)
+		finished_game = cell.test_win_condition(self.placed_cells, WIN_CONDITION)
+		if not finished_game:
+			next_turn()
+	
+	return finished_game
 
-func _place_at(coords: Vector2):
+func _place_at(coords: Vector2) -> HexCell:
 	#if not can_place_at(coords):
 		#return
 	
+	var new_cell = HexCell.new(coords, self.turn)
+	self.placed_cells.set(coords, new_cell)
 	if self.turn == Players.RED:
 		self.red_layer.set_cell(coords, TILESET_ID, Vector2i(1, 1))
-		return
+		return new_cell
 	
 	self.blue_layer.set_cell(coords, TILESET_ID, Vector2i(0, 1))
-	return
+	return new_cell
 
 func can_place_at(coords: Vector2i) -> bool:
 	if self.background_layer.get_cell_atlas_coords(coords) == Vector2i(-1, -1):

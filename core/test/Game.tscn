@@ -41,15 +41,18 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="CurrentTurn" type="Label" parent="Camera2D/UI" unique_id=1310302038]
+[node name="CurrentTurn" type="RichTextLabel" parent="Camera2D/UI" unique_id=1396821279]
 texture_filter = 1
 layout_mode = 0
 offset_left = -316.0
 offset_top = -306.0
-offset_right = -159.0
+offset_right = -109.0
 offset_bottom = -272.0
-theme_override_font_sizes/font_size = 24
-text = "Current Turn:"
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[color=blue]aaaaaaa"
+scroll_active = false
 
 [node name="ResetButton" type="Button" parent="Camera2D/UI" unique_id=1954811766]
 layout_mode = 0
