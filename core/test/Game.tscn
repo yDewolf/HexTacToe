@@ -4,9 +4,10 @@
 [ext_resource type="TileSet" uid="uid://dwvvte1vfmbc5" path="res://assets/tileset/hex-tileset.tres" id="2_bfp6u"]
 [ext_resource type="Script" uid="uid://di4antpmdnpc2" path="res://core/components/Camera/SimpleCamera.gd" id="3_bfp6u"]
 
-[node name="Game" type="Node" unique_id=1148105645 node_paths=PackedStringArray("level_node", "background_layer", "red_layer", "blue_layer", "current_turn_label", "reset_button")]
+[node name="Game" type="Node" unique_id=1148105645 node_paths=PackedStringArray("level_node", "debug_layer", "background_layer", "red_layer", "blue_layer", "current_turn_label", "reset_button")]
 script = ExtResource("1_mdyvo")
 level_node = NodePath("Level")
+debug_layer = NodePath("Level/Debug")
 background_layer = NodePath("Level/Background")
 red_layer = NodePath("Level/Red")
 blue_layer = NodePath("Level/Blue")
@@ -26,6 +27,10 @@ texture_filter = 1
 tile_set = ExtResource("2_bfp6u")
 
 [node name="Blue" type="TileMapLayer" parent="Level" unique_id=1428142042]
+texture_filter = 1
+tile_set = ExtResource("2_bfp6u")
+
+[node name="Debug" type="TileMapLayer" parent="Level" unique_id=970073259]
 texture_filter = 1
 tile_set = ExtResource("2_bfp6u")
 

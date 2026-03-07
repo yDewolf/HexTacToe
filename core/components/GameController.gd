@@ -3,6 +3,9 @@ class_name GameController
 
 @export var level_node: Node2D
 
+@export var debug_layer: TileMapLayer
+@export var debug_mode: bool = false
+
 @export var background_layer: TileMapLayer
 @export var red_layer: TileMapLayer
 @export var blue_layer: TileMapLayer
@@ -37,6 +40,11 @@ var player_turns: int = 2
 
 func _ready() -> void:
 	self.on_reset()
+	_setup_background()
+	
+	reset_button.pressed.connect(on_reset)
+
+func _setup_background():
 	for x in range(self.map_size.x):
 		for y in range(self.map_size.y): 
 			self.background_layer.set_cell(
@@ -44,8 +52,6 @@ func _ready() -> void:
 				TILESET_ID,
 				Vector2i.ZERO
 			)
-	
-	reset_button.pressed.connect(on_reset)
 
 func _process(delta: float) -> void:
 	var finished_game: bool = false
@@ -68,6 +74,7 @@ func on_reset():
 	self.running = true
 	self.steps = 0
 	self.placed_cells.clear()
+	self.debug_layer.clear()
 	self.red_layer.clear()
 	self.blue_layer.clear()
 	self.turn = Players.RED
@@ -85,11 +92,14 @@ func place_at(global_coords: Vector2) -> bool:
 	return finished_game
 
 func _place_at(coords: Vector2) -> HexCell:
-	#if not can_place_at(coords):
-		#return
 	var new_cell = HexCell.new(coords, self.turn)
-	self.placed_cells.set(coords, new_cell)
+	if debug_mode:
+		debug_layer.clear()
+		for axis in new_cell.baked_axis_positions:
+			for pos in axis:
+				debug_layer.set_cell(pos, TILESET_ID, Vector2i(1, 0))
 	
+	self.placed_cells.set(coords, new_cell)
 	if self.turn == Players.RED:
 		self.red_layer.set_cell(coords, TILESET_ID, Vector2i(1, 1))
 		return new_cell
