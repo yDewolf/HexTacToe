@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dcc1kcsufwny5" path="res://core/components/GameController.gd" id="1_mdyvo"]
 [ext_resource type="TileSet" uid="uid://dwvvte1vfmbc5" path="res://assets/tileset/hex-tileset.tres" id="2_bfp6u"]
+[ext_resource type="Script" uid="uid://di4antpmdnpc2" path="res://core/components/Camera/SimpleCamera.gd" id="3_bfp6u"]
 
 [node name="Game" type="Node" unique_id=1148105645 node_paths=PackedStringArray("level_node", "background_layer", "red_layer", "blue_layer", "current_turn_label", "reset_button")]
 script = ExtResource("1_mdyvo")
@@ -28,29 +29,34 @@ tile_set = ExtResource("2_bfp6u")
 texture_filter = 1
 tile_set = ExtResource("2_bfp6u")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=644880690]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=644880690 node_paths=PackedStringArray("level_node")]
 position = Vector2(0, -48)
+script = ExtResource("3_bfp6u")
+level_node = NodePath("../Level")
 
 [node name="UI" type="Control" parent="Camera2D" unique_id=145071883]
 layout_mode = 3
 anchors_preset = 0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="CurrentTurn" type="Label" parent="Camera2D/UI" unique_id=1310302038]
 texture_filter = 1
 layout_mode = 0
-offset_left = -373.0
-offset_top = -311.0
-offset_right = -216.0
-offset_bottom = -277.0
+offset_left = -316.0
+offset_top = -306.0
+offset_right = -159.0
+offset_bottom = -272.0
 theme_override_font_sizes/font_size = 24
 text = "Current Turn:"
 
 [node name="ResetButton" type="Button" parent="Camera2D/UI" unique_id=1954811766]
 layout_mode = 0
-offset_left = 298.0
-offset_top = -307.0
-offset_right = 370.0
-offset_bottom = -265.0
+offset_left = 245.0
+offset_top = -308.0
+offset_right = 317.0
+offset_bottom = -266.0
 theme_override_font_sizes/font_size = 24
 text = "Reset"
 

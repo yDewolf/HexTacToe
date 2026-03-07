@@ -33,10 +33,12 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("Place"):
 		var mouse_coords = background_layer.get_local_mouse_position()
-		var local_coords = background_layer.local_to_map(mouse_coords)
-		if can_place_at(local_coords):
-			place_at(local_coords)
-			next_turn()
+		place_at(mouse_coords)
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventScreenTouch:
+		place_at(event.position)
+
 
 func on_reset():
 	self.steps = 0
@@ -45,7 +47,13 @@ func on_reset():
 	self.turn = Players.RED
 
 
-func place_at(coords: Vector2):
+func place_at(global_coords: Vector2):
+	var local_coords = background_layer.local_to_map(global_coords)
+	if can_place_at(local_coords):
+		_place_at(local_coords)
+		next_turn()
+
+func _place_at(coords: Vector2):
 	#if not can_place_at(coords):
 		#return
 	
