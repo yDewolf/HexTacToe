@@ -16,7 +16,15 @@ enum Players {
 	BLUE
 }
 
-var turn: int = Players.RED
+var turn: int = Players.RED:
+	set(value):
+		turn = value
+		self.current_turn_label.text = str(Players.find_key(self.turn)) + "'s turn"
+
+var steps: int = 0
+
+const PLAYER_TURN_COUNT: int = 2
+var player_turns: int = 2
 
 func _ready() -> void:
 	self.on_reset()
@@ -31,6 +39,7 @@ func _process(delta: float) -> void:
 			next_turn()
 
 func on_reset():
+	self.steps = 0
 	self.red_layer.clear()
 	self.blue_layer.clear()
 	self.turn = Players.RED
@@ -60,8 +69,11 @@ func can_place_at(coords: Vector2i) -> bool:
 	return true
 
 func next_turn():
-	self.turn = self.turn + 1
-	if self.turn >= Players.size():
-		self.turn = 0
+	self.player_turns -= 1
+	if self.player_turns <= 0 or steps == 0:
+		self.player_turns = PLAYER_TURN_COUNT
+		self.turn = self.turn + 1
+		if self.turn >= Players.size():
+			self.turn = 0
 	
-	self.current_turn_label.text = str(Players.find_key(self.turn)) + "'s turn"
+	steps += 1

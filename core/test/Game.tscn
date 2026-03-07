@@ -29,6 +29,7 @@ texture_filter = 1
 tile_set = ExtResource("2_bfp6u")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=644880690]
+position = Vector2(0, -48)
 
 [node name="UI" type="Control" parent="Camera2D" unique_id=145071883]
 layout_mode = 3
@@ -52,3 +53,15 @@ offset_right = 370.0
 offset_bottom = -265.0
 theme_override_font_sizes/font_size = 24
 text = "Reset"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Camera2D/UI" unique_id=568974436]
+layout_mode = 0
+offset_left = -130.0
+offset_top = -302.0
+offset_right = 134.0
+offset_bottom = -219.0
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[rainbow freq=0.1 sat=1.0 val=1.0][wave amp=100]Hex Tac Toe"
+scroll_active = false
+horizontal_alignment = 1
