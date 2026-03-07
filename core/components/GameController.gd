@@ -9,6 +9,8 @@ extends Node
 @export var current_turn_label: Label
 @export var reset_button: Button
 
+@export var map_size: Vector2 = Vector2(100, 100)
+
 const TILESET_ID = 0
 
 enum Players {
@@ -28,6 +30,14 @@ var player_turns: int = 2
 
 func _ready() -> void:
 	self.on_reset()
+	for x in range(self.map_size.x):
+		for y in range(self.map_size.y): 
+			self.background_layer.set_cell(
+				Vector2i(x - self.map_size.x / 2, y - self.map_size.y / 2),
+				TILESET_ID,
+				Vector2i.ZERO
+			)
+	
 	reset_button.pressed.connect(on_reset)
 
 func _process(delta: float) -> void:
