@@ -49,6 +49,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	var finished_game: bool = false
+	print(background_layer.local_to_map(background_layer.get_local_mouse_position()))
 	if self.running:
 		if Input.is_action_just_pressed("Place"):
 			var mouse_coords = background_layer.get_local_mouse_position()
@@ -86,9 +87,9 @@ func place_at(global_coords: Vector2) -> bool:
 func _place_at(coords: Vector2) -> HexCell:
 	#if not can_place_at(coords):
 		#return
-	
 	var new_cell = HexCell.new(coords, self.turn)
 	self.placed_cells.set(coords, new_cell)
+	
 	if self.turn == Players.RED:
 		self.red_layer.set_cell(coords, TILESET_ID, Vector2i(1, 1))
 		return new_cell
