@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://dcc1kcsufwny5" path="res://core/components/GameController.gd" id="1_mdyvo"]
 [ext_resource type="TileSet" uid="uid://dwvvte1vfmbc5" path="res://assets/tileset/hex-tileset.tres" id="2_bfp6u"]
 [ext_resource type="Script" uid="uid://di4antpmdnpc2" path="res://core/components/Camera/SimpleCamera.gd" id="3_bfp6u"]
+[ext_resource type="Script" uid="uid://beymoyyooxy8h" path="res://core/components/Multiplayer/PlayerCursorDisplayer.gd" id="4_12tkt"]
+[ext_resource type="PackedScene" uid="uid://dvdc56d1rqhdi" path="res://core/components/Multiplayer/asset/PlayerCursor.tscn" id="5_blbyx"]
 
 [node name="Game" type="Node" unique_id=1148105645 node_paths=PackedStringArray("level_node", "debug_layer", "background_layer", "red_layer", "blue_layer", "current_turn_label", "reset_button")]
 script = ExtResource("1_mdyvo")
@@ -38,6 +40,12 @@ tile_set = ExtResource("2_bfp6u")
 position = Vector2(0, -48)
 script = ExtResource("3_bfp6u")
 level_node = NodePath("../Level")
+
+[node name="CursorHolder" type="Control" parent="Camera2D" unique_id=1627041541]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="UI" type="Control" parent="Camera2D" unique_id=145071883]
 layout_mode = 3
@@ -79,3 +87,8 @@ bbcode_enabled = true
 text = "[rainbow freq=0.1 sat=1.0 val=1.0][wave amp=100]Hex Tac Toe"
 scroll_active = false
 horizontal_alignment = 1
+
+[node name="PlayerCursorDisplayer" type="Node" parent="." unique_id=942908893 node_paths=PackedStringArray("cursor_holder")]
+script = ExtResource("4_12tkt")
+cursor_holder = NodePath("../Camera2D/CursorHolder")
+cursor_scene = ExtResource("5_blbyx")

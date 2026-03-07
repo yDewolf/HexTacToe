@@ -12,9 +12,13 @@ config_version=5
 
 config/name="HexTacToe"
 config/version="001"
-run/main_scene="uid://c6pyb62d5igtl"
+run/main_scene="uid://cebmhytsm7nno"
 config/features=PackedStringArray("4.6", "Mobile")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Lobby="*uid://u5suo0spou1u"
 
 [input]
 

@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://cebmhytsm7nno"]
+
+[ext_resource type="Script" uid="uid://dxi7jxej2vvnb" path="res://core/components/Multiplayer/LobbyController.gd" id="1_walh1"]
+[ext_resource type="Script" uid="uid://beymoyyooxy8h" path="res://core/components/Multiplayer/PlayerCursorDisplayer.gd" id="2_dmmeh"]
+[ext_resource type="PackedScene" uid="uid://c6pyb62d5igtl" path="res://core/test/Game.tscn" id="2_mmdv4"]
+[ext_resource type="PackedScene" uid="uid://dvdc56d1rqhdi" path="res://core/components/Multiplayer/asset/PlayerCursor.tscn" id="3_walh1"]
+
+[node name="Lobby" type="Node" unique_id=1746042907 node_paths=PackedStringArray("start_game_button", "create_client_button", "create_server_button")]
+script = ExtResource("1_walh1")
+start_game_button = NodePath("UI/CenterContainer/VBoxContainer/Start")
+create_client_button = NodePath("UI/CenterContainer/VBoxContainer/CreateClient")
+create_server_button = NodePath("UI/CenterContainer/VBoxContainer/CreateServer")
+main_scene = ExtResource("2_mmdv4")
+
+[node name="UI" type="Control" parent="." unique_id=1736244000]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="UI" unique_id=415121632]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/CenterContainer" unique_id=14343198]
+layout_mode = 2
+
+[node name="Start" type="Button" parent="UI/CenterContainer/VBoxContainer" unique_id=1246675054]
+layout_mode = 2
+disabled = true
+text = "Start"
+
+[node name="CreateClient" type="Button" parent="UI/CenterContainer/VBoxContainer" unique_id=150142632]
+layout_mode = 2
+text = "Create Client"
+
+[node name="CreateServer" type="Button" parent="UI/CenterContainer/VBoxContainer" unique_id=788082761]
+layout_mode = 2
+text = "Create Server"
+
+[node name="PlayerCursorDisplayer" type="Node" parent="." unique_id=709844675 node_paths=PackedStringArray("cursor_holder")]
+script = ExtResource("2_dmmeh")
+cursor_holder = NodePath("../CursorHolder")
+cursor_scene = ExtResource("3_walh1")
+
+[node name="CursorHolder" type="Control" parent="." unique_id=317706949]
+layout_mode = 3
+anchors_preset = 0

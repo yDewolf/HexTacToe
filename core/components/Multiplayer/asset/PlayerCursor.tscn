@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://dvdc56d1rqhdi"]
+
+[ext_resource type="Script" uid="uid://cl4y6ryq880fe" path="res://core/components/Multiplayer/asset/PlayerCursor.gd" id="1_0fp7f"]
+[ext_resource type="Texture2D" uid="uid://isaa0orf7blj" path="res://assets/cursor.png" id="2_nev50"]
+
+[node name="PlayerCursor" type="Control" unique_id=591788844 node_paths=PackedStringArray("cursor_label")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_0fp7f")
+cursor_label = NodePath("TextureRect/Label")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=495028541]
+texture_filter = 1
+layout_mode = 0
+offset_right = 7.0
+offset_bottom = 13.0
+scale = Vector2(3, 3)
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("2_nev50")
+
+[node name="Label" type="Label" parent="TextureRect" unique_id=1335833710]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -9.500002
+offset_top = 1.000001
+offset_right = 41.5
+offset_bottom = 13.000002
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.4, 0.4)
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 8
+text = "12930912039"
+horizontal_alignment = 1
