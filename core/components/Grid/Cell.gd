@@ -22,11 +22,12 @@ func test_win_condition(all_cells: Dictionary[Vector2i, HexCell], streak: int = 
 			
 			if cell_at_offset.player_id != self.player_id:
 #				FIXME: Arrumar o baglh de skipar um tile
+				cell_streak.clear()
 				continue
 			
 			cell_streak.append(cell_at_offset)
 			
-			if len(cell_streak) == streak - 1:
+			if len(cell_streak) == streak:
 				return cell_streak
 	
 	return []
@@ -35,20 +36,16 @@ func test_win_condition(all_cells: Dictionary[Vector2i, HexCell], streak: int = 
 func get_axis_positions(max_length: int = 6) -> Array[Array]:
 	var positions: Array[Array] = []
 	
-	for axis in HexOffsets.AXIS:
+	for offset in HexOffsets.DIRECTIONS:
 		var axis_positions: Array[Vector2i] = []
-		for offset in axis:
-			var previous_pos: Vector2i = self.position
-			
-			for streak_idx in range(1, max_length):
-				var fixed_offset: Vector2i = offset
-				if offset.y != 0:
-					var cancel_x_offset = int(previous_pos.y % 2 == 0)
-					fixed_offset.x = offset.x - cancel_x_offset if offset.x > 0 else -cancel_x_offset
-				
-				var offsetted_pos = previous_pos + fixed_offset
-				axis_positions.append(offsetted_pos)
-				previous_pos = offsetted_pos
+		var start_pos = HexOffsets.hex_step(
+			self.position, -offset, max_length
+		)
+		var previous_pos = start_pos
+		for offset_step in range(0, max_length * 2 - 1):
+			var offsetted_pos = HexOffsets.hex_step(previous_pos, offset)
+			previous_pos = offsetted_pos
+			axis_positions.append(previous_pos)
 		
 		positions.append(axis_positions)
 	

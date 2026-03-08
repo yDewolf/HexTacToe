@@ -116,7 +116,7 @@ func place_at(global_coords: Vector2, _player_id: int):
 			if cell_streak.is_empty():
 				next_turn()
 			
-			if len(cell_streak) + 1 == WIN_CONDITION:
+			if len(cell_streak) == WIN_CONDITION:
 				should_finish = true
 				var positions = [new_cell.position]
 				for _cell in cell_streak:
