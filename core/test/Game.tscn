@@ -25,6 +25,7 @@ blue_layer = NodePath("Level/Blue")
 current_turn_label = NodePath("UI/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/CurrentTurn")
 reset_button = NodePath("UI/MarginContainer/ResetButton")
 moves_left_label = NodePath("UI/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MovesLeft")
+map_size = Vector2(30, 30)
 
 [node name="Level" type="Node2D" parent="." unique_id=1023202696]
 scale = Vector2(6, 6)
@@ -173,8 +174,8 @@ script = ExtResource("3_32tx5")
 ui_elements = [NodePath("../../TutorialUI")]
 
 [node name="TutorialUI" parent="UI" unique_id=1339572901 instance=ExtResource("3_ygb7s")]
-visible = false
 layout_mode = 1
+show_close_button = true
 
 [node name="PlayerCursorDisplayer" type="Node" parent="." unique_id=942908893 node_paths=PackedStringArray("ref_node", "cursor_holder")]
 script = ExtResource("4_12tkt")

@@ -108,6 +108,7 @@ icon = ExtResource("2_v185s")
 expand_icon = true
 
 [node name="CloseButton" type="Button" parent="." unique_id=820415970]
+z_index = 1
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
