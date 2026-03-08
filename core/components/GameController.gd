@@ -190,7 +190,7 @@ func update_turn(_player_id: int):
 	self.update_turn_label(_player_id)
 
 func update_turn_label(_player_id: int):
-	var bbcode = "[color=" + ("red" if self.player_ids.find(_player_id) == 1 else "blue") + "]"
+	var bbcode = "[color=" + ("de1818" if self.player_ids.find(_player_id) == 1 else "186ede") + "]"
 	self.current_turn_label.set_text(
 		bbcode + str(_player_id) + "'s turn"
 	)

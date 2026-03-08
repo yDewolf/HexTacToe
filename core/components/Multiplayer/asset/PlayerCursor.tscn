@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cl4y6ryq880fe" path="res://core/components/Multiplayer/asset/PlayerCursor.gd" id="1_0fp7f"]
 [ext_resource type="Texture2D" uid="uid://isaa0orf7blj" path="res://assets/cursor.png" id="2_nev50"]
+[ext_resource type="Theme" uid="uid://dej4vu4iatgdm" path="res://assets/themes/main_theme.tres" id="3_ipdlv"]
 
 [node name="PlayerCursor" type="Control" unique_id=591788844 node_paths=PackedStringArray("cursor_label")]
 layout_mode = 3
@@ -28,12 +29,13 @@ anchor_left = 0.246
 anchor_top = 1.0
 anchor_right = 0.246
 anchor_bottom = 1.0
-offset_left = -10.198
-offset_right = 40.802
+offset_left = -14.864666
+offset_right = 60.135334
 offset_bottom = 12.0
 grow_horizontal = 2
 scale = Vector2(0.4, 0.4)
 size_flags_horizontal = 4
+theme = ExtResource("3_ipdlv")
 theme_override_font_sizes/font_size = 8
 text = "12930912039"
 horizontal_alignment = 1

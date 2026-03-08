@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://dqixfn47f2f5m" path="res://core/components/ui/ToggleVisibilityButton.gd" id="3_fhv5n"]
 [ext_resource type="TileSet" uid="uid://dwvvte1vfmbc5" path="res://assets/tileset/hex-tileset.tres" id="3_r0snf"]
 [ext_resource type="PackedScene" uid="uid://dvdc56d1rqhdi" path="res://core/components/Multiplayer/asset/PlayerCursor.tscn" id="3_walh1"]
+[ext_resource type="Theme" uid="uid://dej4vu4iatgdm" path="res://assets/themes/main_theme.tres" id="4_112cu"]
 [ext_resource type="PackedScene" uid="uid://cp22y0x3wad7" path="res://core/components/Tutorial/HowToPlay.tscn" id="4_r0snf"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fhv5n"]
@@ -29,12 +30,14 @@ tile_set = ExtResource("3_r0snf")
 [node name="Node2D" type="Node2D" parent="." unique_id=1666974634]
 
 [node name="UI" type="Control" parent="." unique_id=1736244000]
+texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("4_112cu")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=337745383]
 layout_mode = 1
