@@ -4,3 +4,5 @@
 *.tmp
 *.exe
 *.7z
+*.apk
+*.idsig

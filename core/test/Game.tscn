@@ -6,19 +6,17 @@
 [ext_resource type="Script" uid="uid://beymoyyooxy8h" path="res://core/components/Multiplayer/PlayerCursorDisplayer.gd" id="4_12tkt"]
 [ext_resource type="PackedScene" uid="uid://dvdc56d1rqhdi" path="res://core/components/Multiplayer/asset/PlayerCursor.tscn" id="5_blbyx"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_blbyx"]
-bg_color = Color(1, 1, 1, 1)
-
-[node name="Game" type="Node" unique_id=1148105645 node_paths=PackedStringArray("level_node", "debug_layer", "background_layer", "red_layer", "blue_layer", "current_turn_label", "reset_button", "moves_left_label")]
+[node name="Game" type="Node" unique_id=1148105645 node_paths=PackedStringArray("level_node", "camera", "debug_layer", "background_layer", "red_layer", "blue_layer", "current_turn_label", "reset_button", "moves_left_label")]
 script = ExtResource("1_mdyvo")
 level_node = NodePath("Level")
+camera = NodePath("Camera2D")
 debug_layer = NodePath("Level/Debug")
 background_layer = NodePath("Level/Background")
 red_layer = NodePath("Level/Red")
 blue_layer = NodePath("Level/Blue")
-current_turn_label = NodePath("Camera2D/UI/CurrentTurn")
-reset_button = NodePath("Camera2D/UI/ResetButton")
-moves_left_label = NodePath("Camera2D/UI/MovesLeft")
+current_turn_label = NodePath("UI/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/CurrentTurn")
+reset_button = NodePath("UI/MarginContainer/ResetButton")
+moves_left_label = NodePath("UI/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MovesLeft")
 
 [node name="Level" type="Node2D" parent="." unique_id=1023202696]
 scale = Vector2(6, 6)
@@ -40,69 +38,88 @@ tile_set = ExtResource("2_bfp6u")
 texture_filter = 1
 tile_set = ExtResource("2_bfp6u")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=644880690 node_paths=PackedStringArray("ui")]
-position = Vector2(0, -48)
-script = ExtResource("3_bfp6u")
-ui = NodePath("UI")
-
-[node name="CursorHolder" type="Control" parent="Camera2D" unique_id=1627041541]
+[node name="UI" type="Control" parent="." unique_id=145071883]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -400.0
+offset_top = -200.0
+offset_right = -400.0
+offset_bottom = -200.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(400, 200)
 
-[node name="UI" type="Control" parent="Camera2D" unique_id=145071883]
-layout_mode = 3
+[node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=1863843824]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 60
+theme_override_constants/margin_bottom = 60
 
-[node name="CurrentTurn" type="RichTextLabel" parent="Camera2D/UI" unique_id=1396821279]
-texture_filter = 1
-layout_mode = 0
-offset_left = -316.0
-offset_top = -306.0
-offset_right = -109.0
-offset_bottom = -272.0
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 24
-bbcode_enabled = true
-text = "[color=blue]aaaaaaa"
-scroll_active = false
-
-[node name="ResetButton" type="Button" parent="Camera2D/UI" unique_id=1954811766]
-layout_mode = 0
-offset_left = 245.0
-offset_top = -308.0
-offset_right = 317.0
-offset_bottom = -266.0
-theme_override_font_sizes/font_size = 24
-text = "Reset"
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Camera2D/UI" unique_id=568974436]
-layout_mode = 0
-offset_left = -130.0
-offset_top = -302.0
-offset_right = 134.0
-offset_bottom = -219.0
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/MarginContainer" unique_id=568974436]
+layout_mode = 2
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[rainbow freq=0.1 sat=1.0 val=1.0][wave amp=100]Hex Tac Toe"
 scroll_active = false
 horizontal_alignment = 1
 
-[node name="MovesLeft" type="Label" parent="Camera2D/UI" unique_id=754617008]
-layout_mode = 0
-offset_left = -315.0
-offset_top = -271.0
-offset_right = -226.0
-offset_bottom = -248.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+[node name="PanelContainer" type="PanelContainer" parent="UI/MarginContainer" unique_id=1303759724]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/MarginContainer/PanelContainer" unique_id=1232822522]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer/PanelContainer/MarginContainer" unique_id=350467227]
+layout_mode = 2
+
+[node name="CurrentTurn" type="RichTextLabel" parent="UI/MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1396821279]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[color=blue]aaaaaaaaa"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="MovesLeft" type="Label" parent="UI/MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=754617008]
+layout_mode = 2
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_blbyx")
 text = "Moves Left:"
+
+[node name="ResetButton" type="Button" parent="UI/MarginContainer" unique_id=1954811766]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 24
+text = "Reset"
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=644880690 node_paths=PackedStringArray("ui")]
+script = ExtResource("3_bfp6u")
+ui = NodePath("../UI")
+_zoom = 1.5
+
+[node name="CursorHolder" type="Control" parent="Camera2D" unique_id=1627041541]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="PlayerCursorDisplayer" type="Node" parent="." unique_id=942908893 node_paths=PackedStringArray("ref_node", "cursor_holder")]
 script = ExtResource("4_12tkt")

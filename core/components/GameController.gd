@@ -3,6 +3,7 @@ class_name GameController
 
 @export var level_node: Node2D
 
+@export var camera: Camera2D
 @export var debug_layer: TileMapLayer
 @export var debug_mode: bool = false
 
@@ -68,7 +69,8 @@ func _process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventScreenTouch:
-		request_place_at.rpc(event.position)
+		if event.pressed and event.double_tap:
+			request_place_at.rpc(background_layer.get_local_mouse_position())
 
 
 func request_reset():
