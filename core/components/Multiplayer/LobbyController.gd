@@ -8,14 +8,17 @@ extends Node
 
 @export var address_edit: LineEdit
 
-@export var main_scene: PackedScene
+#@export var offline_mode_selection_scene: PackedScene
+#@export var main_scene: PackedScene
 
 func _ready() -> void:
-	create_client_button.pressed.connect(Lobby.create_client)
-	create_server_button.pressed.connect(Lobby.create_server)
+	MultiPlay.reset_peer()
+	
+	create_client_button.pressed.connect(MultiPlay.create_client)
+	create_server_button.pressed.connect(MultiPlay.create_server)
 	start_game_button.pressed.connect(start_game)
 	play_offline_button.pressed.connect(start_game_offline)
-	Lobby.created_peer.connect(_on_peer_created)
+	MultiPlay.created_peer.connect(_on_peer_created)
 	address_edit.text_changed.connect(_on_edit_address)
 
 func start_game():
@@ -24,13 +27,14 @@ func start_game():
 
 @rpc("authority", "reliable", "call_local")
 func _start_game():
-	get_tree().change_scene_to_packed(main_scene)
+	SceneManager.change_to_scene(SceneManager.SceneIndexes.GAME)
 
 func start_game_offline():
-	get_tree().change_scene_to_packed(main_scene)
+	SceneManager.change_to_scene(SceneManager.SceneIndexes.OFFLINE_SELECTION)
 
 
 func _on_peer_created():
+	self.play_offline_button.disabled = true
 	self.create_client_button.disabled = true
 	self.create_server_button.disabled = true
 	
@@ -39,4 +43,4 @@ func _on_peer_created():
 
 
 func _on_edit_address(new_address: String):
-	Lobby.IP_ADDRESS = new_address
+	MultiPlay.IP_ADDRESS = new_address

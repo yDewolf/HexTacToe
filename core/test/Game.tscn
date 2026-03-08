@@ -25,7 +25,7 @@ blue_layer = NodePath("Level/Blue")
 current_turn_label = NodePath("UI/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/CurrentTurn")
 reset_button = NodePath("UI/MarginContainer/ResetButton")
 moves_left_label = NodePath("UI/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MovesLeft")
-map_size = Vector2(30, 30)
+map_size = Vector2(48, 48)
 
 [node name="Level" type="Node2D" parent="." unique_id=1023202696]
 scale = Vector2(6, 6)

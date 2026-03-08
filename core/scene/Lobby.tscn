@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://dxi7jxej2vvnb" path="res://core/components/Multiplayer/LobbyController.gd" id="1_walh1"]
 [ext_resource type="Script" uid="uid://beymoyyooxy8h" path="res://core/components/Multiplayer/PlayerCursorDisplayer.gd" id="2_dmmeh"]
-[ext_resource type="PackedScene" uid="uid://c6pyb62d5igtl" path="res://core/test/Game.tscn" id="2_mmdv4"]
 [ext_resource type="Script" uid="uid://dqixfn47f2f5m" path="res://core/components/ui/ToggleVisibilityButton.gd" id="3_fhv5n"]
 [ext_resource type="TileSet" uid="uid://dwvvte1vfmbc5" path="res://assets/tileset/hex-tileset.tres" id="3_r0snf"]
 [ext_resource type="PackedScene" uid="uid://dvdc56d1rqhdi" path="res://core/components/Multiplayer/asset/PlayerCursor.tscn" id="3_walh1"]
@@ -19,7 +18,6 @@ start_game_button = NodePath("UI/MarginContainer/CenterContainer/VBoxContainer/S
 create_client_button = NodePath("UI/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/CreateClient")
 create_server_button = NodePath("UI/MarginContainer/CenterContainer/VBoxContainer/CreateServer")
 address_edit = NodePath("UI/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/ServerIP")
-main_scene = ExtResource("2_mmdv4")
 
 [node name="Background" type="TileMapLayer" parent="." unique_id=674949379]
 texture_filter = 1

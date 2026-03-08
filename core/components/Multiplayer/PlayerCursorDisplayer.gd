@@ -7,15 +7,15 @@ extends Node
 var cursors: Dictionary[int, PlayerCursor] = {}
 
 func _ready() -> void:
-	if Lobby != null:
-		Lobby.created_peer.connect(_on_peer_created)
+	if MultiPlay != null:
+		MultiPlay.created_peer.connect(_on_peer_created)
 	
 	for peer_id in multiplayer.get_peers():
 		add_cursor(peer_id)
 
 func _on_peer_created():
-	Lobby.peer.peer_connected.connect(_on_peer_connected)
-	Lobby.peer.peer_disconnected.connect(_on_peer_disconnected)
+	MultiPlay.peer.peer_connected.connect(_on_peer_connected)
+	MultiPlay.peer.peer_disconnected.connect(_on_peer_disconnected)
 
 
 func _input(event: InputEvent) -> void:

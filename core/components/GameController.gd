@@ -1,16 +1,20 @@
 extends Node
 class_name GameController
 
+@export var MultiPlay_scene: PackedScene
+
 @export var level_node: Node2D
 
 @export var camera: Camera2D
 @export var debug_layer: TileMapLayer
 @export var debug_mode: bool = false
 
+@export_category("Grid layers")
 @export var background_layer: TileMapLayer
 @export var red_layer: TileMapLayer
 @export var blue_layer: TileMapLayer
 
+@export_category("UI")
 @export var current_turn_label: RichTextLabel
 @export var reset_button: Button
 @export var moves_left_label: Label
@@ -36,6 +40,7 @@ const MOVES_PER_TURN: int = 2
 var moves_left: int = 2
 
 func _ready() -> void:
+	MultiPlay.disconnected_from_server.connect(_on_disconnected_from_server)
 	reset_button.pressed.connect(request_reset)
 	if multiplayer and not multiplayer.get_peers().is_empty():
 		if not multiplayer.is_server():
@@ -52,6 +57,9 @@ func _ready() -> void:
 		return
 	
 	if self.is_offline:
+		self.bot_enabled = SoloPlay.ENABLE_BOT
+		if self.bot_enabled:
+			self.map_size = SoloPlay.BOT_MAP_SIZE
 		self.hex_bot = HexBot.new(1.1)
 	
 	on_reset()
@@ -236,3 +244,8 @@ func update_moves_left_label(_moves_left: int):
 func paint_cell_streak(cells: PackedVector2Array):
 	for pos in cells:
 		self.debug_layer.set_cell(Vector2i(pos), TILESET_ID, Vector2i(1, 0))
+
+
+func _on_disconnected_from_server():
+	print(multiplayer.get_unique_id())
+	SceneManager.change_to_scene(SceneManager.SceneIndexes.LOBBY)

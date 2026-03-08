@@ -15,14 +15,16 @@ config/name_localized={
 "pt": "Hexágono da Velha"
 }
 config/description="Tic Tac Toe but hexagonal. First to form a line of 6 tiles win !"
-config/version="007"
+config/version="008"
 run/main_scene="uid://cebmhytsm7nno"
 config/features=PackedStringArray("4.6", "Mobile")
 config/icon="uid://dpnd51iy8i1uv"
 
 [autoload]
 
-Lobby="*uid://u5suo0spou1u"
+SceneManager="*uid://yc35bs6llton"
+MultiPlay="*uid://u5suo0spou1u"
+SoloPlay="*uid://40r6jsqqsrpf"
 
 [display]
 
