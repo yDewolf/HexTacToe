@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dvdc56d1rqhdi" path="res://core/components/Multiplayer/asset/PlayerCursor.tscn" id="3_walh1"]
 [ext_resource type="Theme" uid="uid://dej4vu4iatgdm" path="res://assets/themes/main_theme.tres" id="4_112cu"]
 [ext_resource type="PackedScene" uid="uid://cp22y0x3wad7" path="res://core/components/Tutorial/HowToPlay.tscn" id="4_r0snf"]
+[ext_resource type="Script" uid="uid://cm5kkhp0lx0g0" path="res://core/components/ui/VersionLabel.gd" id="5_112cu"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fhv5n"]
 load_path = "res://.godot/imported/question-mark.png-84d6e1be4313a93cb0492f2b72522131.ctex"
@@ -93,6 +94,25 @@ icon = SubResource("CompressedTexture2D_fhv5n")
 expand_icon = true
 script = ExtResource("3_fhv5n")
 ui_elements = [NodePath("../../../TutorialUI")]
+
+[node name="VersionLabel" type="Label" parent="UI" unique_id=612248458]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -18.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme = ExtResource("4_112cu")
+theme_override_colors/font_color = Color(0.69965345, 0.69965345, 0.69965345, 1)
+theme_override_font_sizes/font_size = 12
+text = "v0.2.1"
+script = ExtResource("5_112cu")
 
 [node name="PlayerCursorDisplayer" type="Node" parent="." unique_id=709844675 node_paths=PackedStringArray("ref_node", "cursor_holder")]
 script = ExtResource("2_dmmeh")

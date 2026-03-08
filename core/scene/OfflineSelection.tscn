@@ -2,6 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://dej4vu4iatgdm" path="res://assets/themes/main_theme.tres" id="1_dqhf8"]
 [ext_resource type="Script" uid="uid://bbjmi2ups04kl" path="res://core/components/Offline/OfflineSelection.gd" id="1_tvv2l"]
+[ext_resource type="Script" uid="uid://cm5kkhp0lx0g0" path="res://core/components/ui/VersionLabel.gd" id="4_3iwfr"]
 [ext_resource type="Texture2D" uid="uid://cuid5gi1id2ka" path="res://assets/left-arrow.png" id="4_yynhb"]
 
 [node name="OfflineSelection" type="Control" unique_id=85932221 node_paths=PackedStringArray("against_player_button", "against_bot_button", "go_back_to_lobby")]
@@ -54,3 +55,22 @@ size_flags_vertical = 0
 icon = ExtResource("4_yynhb")
 icon_alignment = 1
 expand_icon = true
+
+[node name="VersionLabel" type="Label" parent="." unique_id=21755131]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -18.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme = ExtResource("1_dqhf8")
+theme_override_colors/font_color = Color(0.69965345, 0.69965345, 0.69965345, 1)
+theme_override_font_sizes/font_size = 12
+text = "v0.2.1"
+script = ExtResource("4_3iwfr")
