@@ -11,27 +11,27 @@ cursor_label = NodePath("TextureRect/Label")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=495028541]
 texture_filter = 1
-layout_mode = 0
-offset_right = 7.0
-offset_bottom = 13.0
+layout_mode = 1
+offset_right = 13.0
+offset_bottom = 9.0
 scale = Vector2(3, 3)
 size_flags_horizontal = 0
 size_flags_vertical = 4
 texture = ExtResource("2_nev50")
+expand_mode = 2
+stretch_mode = 4
 
 [node name="Label" type="Label" parent="TextureRect" unique_id=1335833710]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
+anchors_preset = -1
+anchor_left = 0.246
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 0.246
 anchor_bottom = 1.0
-offset_left = -9.500002
-offset_top = 1.000001
-offset_right = 41.5
-offset_bottom = 13.000002
+offset_left = -10.198
+offset_right = 40.802
+offset_bottom = 12.0
 grow_horizontal = 2
-grow_vertical = 0
 scale = Vector2(0.4, 0.4)
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 8

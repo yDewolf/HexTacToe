@@ -11,10 +11,14 @@ config_version=5
 [application]
 
 config/name="HexTacToe"
+config/name_localized={
+"pt": "Hexágono da Velha"
+}
+config/description="Tic Tac Toe but hexagonal. First to form a line of 6 tiles win !"
 config/version="006"
 run/main_scene="uid://cebmhytsm7nno"
 config/features=PackedStringArray("4.6", "Mobile")
-config/icon="res://icon.svg"
+config/icon="uid://dpnd51iy8i1uv"
 
 [autoload]
 

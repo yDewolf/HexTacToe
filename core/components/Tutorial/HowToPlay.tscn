@@ -1,0 +1,120 @@
+[gd_scene format=3 uid="uid://cp22y0x3wad7"]
+
+[ext_resource type="Texture2D" uid="uid://cuid5gi1id2ka" path="res://assets/left-arrow.png" id="1_tabfa"]
+[ext_resource type="Script" uid="uid://bbr6ypsu8dygn" path="res://core/components/Tutorial/TutorialUI.gd" id="1_u26g7"]
+[ext_resource type="Texture2D" uid="uid://syh4yf1jkfj" path="res://assets/tutorial/tutorial-ui.png" id="1_v185s"]
+[ext_resource type="Texture2D" uid="uid://boqh88aj4ytbl" path="res://assets/right-arrow.png" id="2_v185s"]
+[ext_resource type="Texture2D" uid="uid://ctyr5skp7yt5x" path="res://assets/tutorial/tutorial-placing.png" id="3_64ke6"]
+[ext_resource type="Texture2D" uid="uid://dbbbkcl28jasr" path="res://assets/tutorial/second-turn.png" id="4_5ljuw"]
+[ext_resource type="Texture2D" uid="uid://biwuosd8btccj" path="res://assets/tutorial/third-turn.png" id="5_pxhlk"]
+[ext_resource type="Texture2D" uid="uid://dv82wc7rwc1um" path="res://assets/tutorial/hex-directions.png" id="6_btodg"]
+[ext_resource type="Texture2D" uid="uid://brpp42h7qgrx4" path="res://assets/tutorial/tutorial-end.png" id="7_5ljuw"]
+[ext_resource type="Texture2D" uid="uid://dsp041j8s2yld" path="res://assets/tutorial/mobile-placing.png" id="8_ktv5m"]
+[ext_resource type="Texture2D" uid="uid://u0mvdpahg2om" path="res://assets/tutorial/mobile-second-turn.png" id="9_pbito"]
+[ext_resource type="Texture2D" uid="uid://c07a0jfeorbao" path="res://assets/tutorial/mobile-third-turn.png" id="10_hylhs"]
+[ext_resource type="Texture2D" uid="uid://dhct70ncpijhk" path="res://assets/tutorial/win-condition.png" id="11_5lb6b"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1q5ic"]
+load_path = "res://.godot/imported/win-condition.png-3505207e1d5e16ea7110f57d4bceb83e.ctex"
+
+[node name="TutorialUI" type="Control" unique_id=810463271 node_paths=PackedStringArray("close_button", "tutorial_image_rect", "current_image_label", "previous_image_button", "next_image_button")]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_u26g7")
+tutorial_images = Array[CompressedTexture2D]([ExtResource("1_v185s"), ExtResource("3_64ke6"), ExtResource("4_5ljuw"), ExtResource("5_pxhlk"), SubResource("CompressedTexture2D_1q5ic"), ExtResource("6_btodg"), ExtResource("7_5ljuw")])
+mobile_tutorial_images = Array[CompressedTexture2D]([ExtResource("1_v185s"), ExtResource("8_ktv5m"), ExtResource("9_pbito"), ExtResource("10_hylhs"), ExtResource("11_5lb6b"), ExtResource("6_btodg"), ExtResource("7_5ljuw")])
+close_button = NodePath("CloseButton")
+tutorial_image_rect = NodePath("PanelContainer/MarginContainer/VBoxContainer/CenterContainer/PanelContainer/MarginContainer/TutorialStep")
+current_image_label = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Images")
+previous_image_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Previous")
+next_image_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Next")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=2144802677]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -260.0
+offset_top = -178.0
+offset_right = 260.0
+offset_bottom = 178.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=698780524]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1054855469]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1434153553]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/CenterContainer" unique_id=642796825]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/CenterContainer/PanelContainer" unique_id=1151946583]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="TutorialStep" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/CenterContainer/PanelContainer/MarginContainer" unique_id=1459023318]
+custom_minimum_size = Vector2(500, 300)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = ExtResource("1_v185s")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1681216454]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="Previous" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=95341437]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 2
+icon = ExtResource("1_tabfa")
+expand_icon = true
+
+[node name="Images" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=91016004]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "0/x"
+horizontal_alignment = 1
+
+[node name="Next" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=2101149786]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 10
+icon = ExtResource("2_v185s")
+expand_icon = true
+
+[node name="CloseButton" type="Button" parent="." unique_id=820415970]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -70.0
+offset_top = 7.0
+offset_right = -20.0
+offset_bottom = 38.0
+grow_horizontal = 0
+text = "Close"

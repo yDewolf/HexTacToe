@@ -36,6 +36,9 @@ func _ready() -> void:
 	_setup_background()
 	reset_button.pressed.connect(request_reset)
 	if multiplayer and not multiplayer.get_peers().is_empty():
+		if not multiplayer.is_server():
+			reset_button.disabled = true
+		
 		is_offline = false
 		player_ids = [multiplayer.get_unique_id()]
 		for id in multiplayer.get_peers():
@@ -58,21 +61,22 @@ func _setup_background():
 			)
 
 func _process(delta: float) -> void:
-	if self.running:
-		if not OS.has_feature("mobile"):
-			if Input.is_action_just_pressed("Place"):
-				var mouse_coords = background_layer.get_local_mouse_position()
-				request_place_at.rpc(mouse_coords)
-	
 	if finished_game and multiplayer.is_server():
 		on_finished.rpc()
 		#on_reset.rpc()
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
+	if not self.running:
+		return
+	
 	if event is InputEventScreenTouch:
 		if event.double_tap:
 			request_place_at.rpc(background_layer.get_local_mouse_position())
-
+	
+	if not OS.has_feature("mobile"):
+		if Input.is_action_just_pressed("Place"):
+			var mouse_coords = background_layer.get_local_mouse_position()
+			request_place_at.rpc(mouse_coords)
 
 func request_reset():
 	# TODO: Add voting
