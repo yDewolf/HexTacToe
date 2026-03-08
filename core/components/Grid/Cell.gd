@@ -21,6 +21,7 @@ func test_win_condition(all_cells: Dictionary[Vector2i, HexCell], streak: int = 
 				continue
 			
 			if cell_at_offset.player_id != self.player_id:
+#				FIXME: Arrumar o baglh de skipar um tile
 				continue
 			
 			cell_streak.append(cell_at_offset)
@@ -33,12 +34,12 @@ func test_win_condition(all_cells: Dictionary[Vector2i, HexCell], streak: int = 
 
 func get_axis_positions(max_length: int = 6) -> Array[Array]:
 	var positions: Array[Array] = []
-
+	
 	for axis in HexOffsets.AXIS:
 		var axis_positions: Array[Vector2i] = []
 		for offset in axis:
 			var previous_pos: Vector2i = self.position
-		
+			
 			for streak_idx in range(1, max_length):
 				var fixed_offset: Vector2i = offset
 				if offset.y != 0:

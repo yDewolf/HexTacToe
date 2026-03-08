@@ -18,8 +18,9 @@ func _on_peer_created():
 	Lobby.peer.peer_disconnected.connect(_on_peer_disconnected)
 
 
-func _physics_process(delta: float) -> void:
-	send_mouse_coords.rpc(self.ref_node.get_global_mouse_position())
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		send_mouse_coords.rpc(self.ref_node.get_global_mouse_position())
 
 
 @rpc("call_local", "any_peer", "unreliable_ordered")

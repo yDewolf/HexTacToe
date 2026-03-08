@@ -1,5 +1,7 @@
 extends Node
 
+@export var play_offline_button: Button
+
 @export var start_game_button: Button
 @export var create_client_button: Button
 @export var create_server_button: Button
@@ -12,6 +14,7 @@ func _ready() -> void:
 	create_client_button.pressed.connect(Lobby.create_client)
 	create_server_button.pressed.connect(Lobby.create_server)
 	start_game_button.pressed.connect(start_game)
+	play_offline_button.pressed.connect(start_game_offline)
 	Lobby.created_peer.connect(_on_peer_created)
 	address_edit.text_changed.connect(_on_edit_address)
 
@@ -22,6 +25,10 @@ func start_game():
 @rpc("authority", "reliable", "call_local")
 func _start_game():
 	get_tree().change_scene_to_packed(main_scene)
+
+func start_game_offline():
+	get_tree().change_scene_to_packed(main_scene)
+
 
 func _on_peer_created():
 	self.create_client_button.disabled = true

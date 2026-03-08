@@ -15,6 +15,7 @@ class_name GameController
 @export var moves_left_label: Label
 
 @export var map_size: Vector2 = Vector2(100, 100)
+var is_offline: bool = true
 
 const TILESET_ID = 0
 const WIN_CONDITION = 6
@@ -34,14 +35,17 @@ func _ready() -> void:
 	_setup_background()
 	reset_button.pressed.connect(request_reset)
 	if multiplayer and not multiplayer.get_peers().is_empty():
+		is_offline = false
 		player_ids = [multiplayer.get_unique_id()]
 		for id in multiplayer.get_peers():
 			player_ids.append(id)
+		
+		if multiplayer.is_server():
+			on_reset.rpc()
+		
+		return
 	
-		#if multiplayer.is_server():
-			#update_turn.rpc(multiplayer.get_unique_id())
-	if multiplayer.is_server():
-		on_reset.rpc()
+	on_reset()
 
 func _setup_background():
 	for x in range(self.map_size.x):
@@ -56,10 +60,6 @@ func _process(delta: float) -> void:
 	if self.running:
 		if Input.is_action_just_pressed("Place"):
 			var mouse_coords = background_layer.get_local_mouse_position()
-			#if multiplayer.is_server():
-				#place_at.rpc(mouse_coords, multiplayer.get_unique_id())
-			#
-			#else:
 			request_place_at.rpc(mouse_coords)
 	
 	if finished_game and multiplayer.is_server():
@@ -96,10 +96,12 @@ func on_reset():
 @rpc("any_peer", "call_local", "reliable")
 func request_place_at(coords: Vector2):
 	if multiplayer.is_server():
-		if self.player_id != multiplayer.get_remote_sender_id():
-			return
+		if not is_offline:
+			if self.player_id != multiplayer.get_remote_sender_id():
+				return
 		
-		place_at.rpc(coords, multiplayer.get_remote_sender_id())
+		var id = multiplayer.get_remote_sender_id() if not is_offline else self.player_id
+		place_at.rpc(coords, id)
 
 
 @rpc("authority", "call_local", "reliable")
@@ -167,9 +169,12 @@ func next_turn():
 			next_idx = 0
 		
 		self.player_id = self.player_ids[next_idx]
-		update_turn.rpc(self.player_id)
+		if multiplayer:
+			update_turn.rpc(self.player_id)
 	
-	update_moves_left.rpc(self.moves_left)
+	if multiplayer:
+		update_moves_left.rpc(self.moves_left)
+	
 	steps += 1
 
 @rpc("authority", "call_local", "reliable")

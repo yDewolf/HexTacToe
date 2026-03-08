@@ -5,8 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://c6pyb62d5igtl" path="res://core/test/Game.tscn" id="2_mmdv4"]
 [ext_resource type="PackedScene" uid="uid://dvdc56d1rqhdi" path="res://core/components/Multiplayer/asset/PlayerCursor.tscn" id="3_walh1"]
 
-[node name="Lobby" type="Node" unique_id=1746042907 node_paths=PackedStringArray("start_game_button", "create_client_button", "create_server_button", "address_edit")]
+[node name="Lobby" type="Node" unique_id=1746042907 node_paths=PackedStringArray("play_offline_button", "start_game_button", "create_client_button", "create_server_button", "address_edit")]
 script = ExtResource("1_walh1")
+play_offline_button = NodePath("UI/CenterContainer/VBoxContainer/Offline")
 start_game_button = NodePath("UI/CenterContainer/VBoxContainer/Start")
 create_client_button = NodePath("UI/CenterContainer/VBoxContainer/HBoxContainer/CreateClient")
 create_server_button = NodePath("UI/CenterContainer/VBoxContainer/CreateServer")
@@ -39,6 +40,10 @@ theme_override_constants/separation = 7
 layout_mode = 2
 disabled = true
 text = "Start"
+
+[node name="Offline" type="Button" parent="UI/CenterContainer/VBoxContainer" unique_id=1619947333]
+layout_mode = 2
+text = "Play Offline"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/CenterContainer/VBoxContainer" unique_id=1609561261]
 layout_mode = 2
