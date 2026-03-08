@@ -7,6 +7,23 @@
 - Each player has 2 moves after the first turn
 - First to make a row of 6 tiles wins
 
+# How to play Multiplayer:
+
+## Using VPN (ex: Radmin):
+Hosting:
+- Click on Host Game
+- When the client join the server, click on start game
+Joining Server:
+- Type the IP of the host and then click on join server
+
+## Using port forwarding:
+Hosting:
+- Open TCP port ``7777`` on your router (and forward to your PC or Cellphone)
+- Tap Host Game
+- Wait for clients to join, then click on start game
+Joining Server:
+- Type the public IP of the host, then click on join server
+
 # Tutorial in images:
 ## Press MB1 to place (or double tap if on mobile):
 ![](https://github.com/yDewolf/HexTacToe/blob/main/assets/tutorial/tutorial-placing.png)
