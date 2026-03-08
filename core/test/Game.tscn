@@ -3,7 +3,9 @@
 [ext_resource type="Script" uid="uid://dcc1kcsufwny5" path="res://core/components/GameController.gd" id="1_mdyvo"]
 [ext_resource type="TileSet" uid="uid://dwvvte1vfmbc5" path="res://assets/tileset/hex-tileset.tres" id="2_bfp6u"]
 [ext_resource type="Script" uid="uid://di4antpmdnpc2" path="res://core/components/Camera/SimpleCamera.gd" id="3_bfp6u"]
+[ext_resource type="Texture2D" uid="uid://drhfsmxjj87ic" path="res://assets/plus.png" id="3_weclg"]
 [ext_resource type="Script" uid="uid://beymoyyooxy8h" path="res://core/components/Multiplayer/PlayerCursorDisplayer.gd" id="4_12tkt"]
+[ext_resource type="Texture2D" uid="uid://6vkslpp4svbp" path="res://assets/minus.png" id="4_ygb7s"]
 [ext_resource type="PackedScene" uid="uid://dvdc56d1rqhdi" path="res://core/components/Multiplayer/asset/PlayerCursor.tscn" id="5_blbyx"]
 
 [node name="Game" type="Node" unique_id=1148105645 node_paths=PackedStringArray("level_node", "camera", "debug_layer", "background_layer", "red_layer", "blue_layer", "current_turn_label", "reset_button", "moves_left_label")]
@@ -110,8 +112,35 @@ size_flags_vertical = 8
 theme_override_font_sizes/font_size = 24
 text = "Reset"
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=644880690 node_paths=PackedStringArray("ui")]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MarginContainer" unique_id=1950109542]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="ZoomIn" type="Button" parent="UI/MarginContainer/HBoxContainer" unique_id=1662137111]
+texture_filter = 1
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+icon = ExtResource("3_weclg")
+expand_icon = true
+
+[node name="ZoomOut" type="Button" parent="UI/MarginContainer/HBoxContainer" unique_id=1666175377]
+texture_filter = 1
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+icon = ExtResource("4_ygb7s")
+expand_icon = true
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=644880690 node_paths=PackedStringArray("zoom_in_button", "zoom_out_button", "ui")]
 script = ExtResource("3_bfp6u")
+zoom_in_button = NodePath("../UI/MarginContainer/HBoxContainer/ZoomIn")
+zoom_out_button = NodePath("../UI/MarginContainer/HBoxContainer/ZoomOut")
 ui = NodePath("../UI")
 _zoom = 1.5
 

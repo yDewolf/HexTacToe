@@ -1,5 +1,8 @@
 extends Camera2D
 
+@export var zoom_in_button: Button
+@export var zoom_out_button: Button
+
 @export var ui: Control
 var start_ui_pos: Vector2
 
@@ -20,6 +23,8 @@ var start_zoom: Vector2 = Vector2(_zoom, _zoom)
 func _ready() -> void:
 	_zoom = _zoom
 	self.start_ui_pos = ui.position
+	zoom_in_button.pressed.connect(zoom_in)
+	zoom_out_button.pressed.connect(zoom_out)
 
 func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("zoom_in"):
@@ -73,12 +78,18 @@ func handle_drag(event: InputEventScreenDrag):
 	if touch_points.size() == 1:
 		self.position -= event.relative * move_speed * 0.15 / _zoom
 	
-	elif touch_points.size() == 2:
-		var touch_point_positions = touch_points.values()
-		var current_distance: float = touch_point_positions[0].distance_to(touch_point_positions[1])
-		
-		var _zoom_factor = start_distance / current_distance * 0.01
-		if _zoom_factor == 0:
-			return
-		
-		_zoom = start_zoom / _zoom_factor
+	#elif touch_points.size() == 2:
+		#var touch_point_positions = touch_points.values()
+		#var current_distance: float = touch_point_positions[0].distance_to(touch_point_positions[1])
+		#
+		#var _zoom_factor = start_distance / current_distance * 0.01
+		#if _zoom_factor == 0:
+			#return
+		#
+		#_zoom = start_zoom / _zoom_factor
+
+func zoom_in():
+	self._zoom += self.zoom_factor
+
+func zoom_out():
+	self._zoom -= self.zoom_factor

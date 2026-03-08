@@ -59,9 +59,10 @@ func _setup_background():
 
 func _process(delta: float) -> void:
 	if self.running:
-		if Input.is_action_just_pressed("Place"):
-			var mouse_coords = background_layer.get_local_mouse_position()
-			request_place_at.rpc(mouse_coords)
+		if not OS.has_feature("mobile"):
+			if Input.is_action_just_pressed("Place"):
+				var mouse_coords = background_layer.get_local_mouse_position()
+				request_place_at.rpc(mouse_coords)
 	
 	if finished_game and multiplayer.is_server():
 		on_finished.rpc()
@@ -69,7 +70,7 @@ func _process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventScreenTouch:
-		if event.pressed and event.double_tap:
+		if event.double_tap:
 			request_place_at.rpc(background_layer.get_local_mouse_position())
 
 
