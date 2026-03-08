@@ -1,17 +1,15 @@
 extends Camera2D
 
-@export var level_node: Node2D
+@export var ui: Control
 
 @export var zoom_factor: float = 0.5
-@export var _zoom: float = 1.0:
+@export var _zoom: float = 1:
 	set(value):
 		_zoom = max(value, zoom_factor)
-		level_node.scale = Vector2(self._zoom, self._zoom)
+		ui.scale = Vector2(1 / self._zoom, 1 / self._zoom)
+		self.zoom = Vector2(value, value)
 
 @export var move_speed: float = 5.0
-
-func _ready() -> void:
-	self._zoom = level_node.scale.x
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("zoom_in"):

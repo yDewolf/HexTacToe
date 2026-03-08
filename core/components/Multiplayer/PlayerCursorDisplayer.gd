@@ -1,5 +1,6 @@
 extends Node
 
+@export var ref_node: Node2D
 @export var cursor_holder: Control
 @export var cursor_scene: PackedScene
 
@@ -18,7 +19,7 @@ func _on_peer_created():
 
 
 func _physics_process(delta: float) -> void:
-	send_mouse_coords.rpc(self.cursor_holder.get_global_mouse_position())
+	send_mouse_coords.rpc(self.ref_node.get_global_mouse_position())
 
 
 @rpc("call_local", "any_peer", "unreliable_ordered")

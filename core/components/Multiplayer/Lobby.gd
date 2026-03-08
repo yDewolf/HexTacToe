@@ -3,7 +3,7 @@ class_name MultiLobby
 
 const PORT = 7777
 const MAX_CLIENTS = 2
-const IP_ADDRESS = "127.0.0.1"
+var IP_ADDRESS = "127.0.0.1"
 
 var peer: ENetMultiplayerPeer
 signal created_peer()

@@ -5,12 +5,15 @@
 [ext_resource type="PackedScene" uid="uid://c6pyb62d5igtl" path="res://core/test/Game.tscn" id="2_mmdv4"]
 [ext_resource type="PackedScene" uid="uid://dvdc56d1rqhdi" path="res://core/components/Multiplayer/asset/PlayerCursor.tscn" id="3_walh1"]
 
-[node name="Lobby" type="Node" unique_id=1746042907 node_paths=PackedStringArray("start_game_button", "create_client_button", "create_server_button")]
+[node name="Lobby" type="Node" unique_id=1746042907 node_paths=PackedStringArray("start_game_button", "create_client_button", "create_server_button", "address_edit")]
 script = ExtResource("1_walh1")
 start_game_button = NodePath("UI/CenterContainer/VBoxContainer/Start")
-create_client_button = NodePath("UI/CenterContainer/VBoxContainer/CreateClient")
+create_client_button = NodePath("UI/CenterContainer/VBoxContainer/HBoxContainer/CreateClient")
 create_server_button = NodePath("UI/CenterContainer/VBoxContainer/CreateServer")
+address_edit = NodePath("UI/CenterContainer/VBoxContainer/HBoxContainer/ServerIP")
 main_scene = ExtResource("2_mmdv4")
+
+[node name="Node2D" type="Node2D" parent="." unique_id=1666974634]
 
 [node name="UI" type="Control" parent="." unique_id=1736244000]
 layout_mode = 3
@@ -30,22 +33,32 @@ grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/CenterContainer" unique_id=14343198]
 layout_mode = 2
+theme_override_constants/separation = 7
 
 [node name="Start" type="Button" parent="UI/CenterContainer/VBoxContainer" unique_id=1246675054]
 layout_mode = 2
 disabled = true
 text = "Start"
 
-[node name="CreateClient" type="Button" parent="UI/CenterContainer/VBoxContainer" unique_id=150142632]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/CenterContainer/VBoxContainer" unique_id=1609561261]
 layout_mode = 2
-text = "Create Client"
+
+[node name="CreateClient" type="Button" parent="UI/CenterContainer/VBoxContainer/HBoxContainer" unique_id=150142632]
+layout_mode = 2
+text = "Join Server"
+
+[node name="ServerIP" type="LineEdit" parent="UI/CenterContainer/VBoxContainer/HBoxContainer" unique_id=2084629793]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "172.0.0.1"
 
 [node name="CreateServer" type="Button" parent="UI/CenterContainer/VBoxContainer" unique_id=788082761]
 layout_mode = 2
-text = "Create Server"
+text = "Host Game"
 
-[node name="PlayerCursorDisplayer" type="Node" parent="." unique_id=709844675 node_paths=PackedStringArray("cursor_holder")]
+[node name="PlayerCursorDisplayer" type="Node" parent="." unique_id=709844675 node_paths=PackedStringArray("ref_node", "cursor_holder")]
 script = ExtResource("2_dmmeh")
+ref_node = NodePath("../Node2D")
 cursor_holder = NodePath("../CursorHolder")
 cursor_scene = ExtResource("3_walh1")
 
