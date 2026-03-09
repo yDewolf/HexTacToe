@@ -64,16 +64,15 @@ offset_bottom = 40.0
 [node name="UI" type="Control" parent="." unique_id=145071883]
 texture_filter = 1
 layout_mode = 3
-anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -400.0
 offset_top = -200.0
 offset_right = -400.0
 offset_bottom = -200.0
-grow_horizontal = 2
-grow_vertical = 2
 pivot_offset = Vector2(400, 200)
+size_flags_horizontal = 0
+size_flags_vertical = 0
 mouse_filter = 1
 theme = ExtResource("4_spvon")
 
@@ -84,10 +83,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 60
-theme_override_constants/margin_top = 30
-theme_override_constants/margin_right = 60
-theme_override_constants/margin_bottom = 60
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI/MarginContainer" unique_id=568974436]
 visible = false
@@ -175,6 +174,7 @@ script = ExtResource("3_32tx5")
 ui_elements = [NodePath("../../TutorialUI")]
 
 [node name="TutorialUI" parent="UI" unique_id=1339572901 instance=ExtResource("3_ygb7s")]
+visible = false
 layout_mode = 1
 show_close_button = true
 
@@ -185,8 +185,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -1.0
-offset_top = -18.0
+offset_left = -70.0
+offset_top = -38.0
+offset_right = -20.0
+offset_bottom = -20.0
 grow_horizontal = 0
 grow_vertical = 0
 size_flags_horizontal = 8

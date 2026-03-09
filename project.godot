@@ -15,7 +15,7 @@ config/name_localized={
 "pt": "Hexágono da Velha"
 }
 config/description="Tic Tac Toe but hexagonal. First to form a line of 6 tiles win !"
-config/version="0.2.1"
+config/version="0.2.2"
 run/main_scene="uid://cebmhytsm7nno"
 config/features=PackedStringArray("4.6", "Mobile")
 config/icon="uid://dpnd51iy8i1uv"
@@ -74,6 +74,7 @@ zoom_out={
 [input_devices]
 
 pointing/android/enable_long_press_as_right_click=true
+pointing/emulate_touch_from_mouse=true
 
 [physics]
 
