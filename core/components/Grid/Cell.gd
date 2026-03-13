@@ -29,6 +29,7 @@ static func get_cell_streak(axis_positions: Array[Array], all_cells: Dictionary[
 		for offsetted_pos in axis:
 			var cell_at_offset = all_cells.get(offsetted_pos, null)
 			if cell_at_offset == null:
+				cell_streak.clear()
 				continue
 			
 			if cell_at_offset.player_id != p_id:
@@ -36,7 +37,6 @@ static func get_cell_streak(axis_positions: Array[Array], all_cells: Dictionary[
 				continue
 			
 			cell_streak.append(cell_at_offset)
-			
 			if len(cell_streak) == streak:
 				return cell_streak
 	
