@@ -30,6 +30,8 @@ var empty_cells: Array[Vector2i] = []
 var running: bool = true
 var finished_game: bool = false
 
+var last_placed_cells: Array[Vector2i] = []
+
 var player_ids = [0, 1]
 var player_id: int = 0
 var hex_bot: HexBot
@@ -47,9 +49,9 @@ func _ready() -> void:
 			reset_button.disabled = true
 		
 		is_offline = false
-		player_ids = [multiplayer.get_unique_id()]
+		self.player_ids = [multiplayer.get_unique_id()]
 		for id in multiplayer.get_peers():
-			player_ids.append(id)
+			self.player_ids.append(id)
 		
 		if multiplayer.is_server():
 			on_reset.rpc()
@@ -156,6 +158,10 @@ func place_at(global_coords: Vector2, _player_id: int, is_local: bool = false):
 		var cell_streak = new_cell.test_win_condition(self.placed_cells, WIN_CONDITION)
 		
 		if multiplayer.is_server():
+			self.last_placed_cells.append(local_coords)
+			if self.last_placed_cells.size() > 2:
+				self.last_placed_cells.remove_at(0)
+			
 			if len(cell_streak) >= WIN_CONDITION:
 				should_finish = true
 				var positions = [new_cell.position]
@@ -214,6 +220,7 @@ func next_turn():
 		self.player_id = self.player_ids[next_idx]
 		if multiplayer:
 			update_turn.rpc(self.player_id)
+			propagate_last_placed.rpc(self.last_placed_cells)
 	
 	if multiplayer:
 		update_moves_left.rpc(self.moves_left)
@@ -244,6 +251,15 @@ func update_moves_left_label(_moves_left: int):
 func paint_cell_streak(cells: PackedVector2Array):
 	for pos in cells:
 		self.debug_layer.set_cell(Vector2i(pos), TILESET_ID, Vector2i(1, 0))
+
+@rpc("authority", "call_local", "reliable")
+func propagate_last_placed(cells: PackedVector2Array):
+	self.debug_layer.clear()
+	self.last_placed_cells.clear()
+	
+	for pos in cells:
+		self.last_placed_cells.append(pos)
+		self.debug_layer.set_cell(Vector2i(pos), TILESET_ID, Vector2i(2, 0))
 
 
 func _on_disconnected_from_server():
