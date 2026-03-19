@@ -128,7 +128,10 @@ func on_reset():
 	self.debug_layer.clear()
 	self.red_layer.clear()
 	self.blue_layer.clear()
+	self.last_placed_cells.clear(	)
+	
 	if multiplayer.is_server():
+		propagate_last_placed.rpc()
 		update_turn.rpc(self.player_ids.pick_random())
 
 @rpc("any_peer", "call_local", "reliable")
